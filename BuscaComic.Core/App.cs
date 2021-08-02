@@ -1,7 +1,8 @@
-﻿using MvvmCross.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using BuscaComic.Core.Infraestructure;
+using BuscaComic.Core.Infraestructure.Impl;
+using BuscaComic.Core.ViewModels;
+using MvvmCross;
+using MvvmCross.ViewModels;
 
 namespace BuscaComic.Core
 {
@@ -10,7 +11,11 @@ namespace BuscaComic.Core
         public override void Initialize()
         {
             // Registrar dependencias
+            Mvx.IoCProvider.RegisterSingleton<IAppSettingsManager>(new AppSettingsManager());
+            Mvx.IoCProvider.RegisterSingleton<IRestFacade>(new RestFacade());
+
             // Registrar ViewModel inicial
+            RegisterAppStart<MainViewModel>();
         }
     }
 }
