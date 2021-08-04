@@ -1,4 +1,6 @@
-﻿using BuscaComic.Core.Infraestructure;
+﻿using BuscaComic.Core.DataAccess;
+using BuscaComic.Core.DataAccess.Impl;
+using BuscaComic.Core.Infraestructure;
 using BuscaComic.Core.Infraestructure.Impl;
 using BuscaComic.Core.ViewModels;
 using MvvmCross;
@@ -11,8 +13,10 @@ namespace BuscaComic.Core
         public override void Initialize()
         {
             // Registrar dependencias
-            Mvx.IoCProvider.RegisterSingleton<IAppSettingsManager>(new AppSettingsManager());
+            Mvx.IoCProvider.RegisterSingleton(new AppSettingsManager());
             Mvx.IoCProvider.RegisterSingleton<IRestFacade>(new RestFacade());
+
+            Mvx.IoCProvider.RegisterType<IMarvelRepository, MarvelRepository>();
 
             // Registrar ViewModel inicial
             RegisterAppStart<MainViewModel>();

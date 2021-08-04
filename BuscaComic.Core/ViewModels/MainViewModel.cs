@@ -4,6 +4,5 @@ namespace BuscaComic.Core.ViewModels
 {
     public class MainViewModel : MvxViewModel
     {
-
     }
 }

@@ -4,7 +4,7 @@ namespace BuscaComic.Core.Infraestructure
 {
     public interface IRestFacade
     {
-        Task<TRes> Get<TRes>(string url);
-        Task<TRes> Post<TRes, TReq>(string url, TReq requestBody);
+        Task<string> Get(string url);
+        Task<string> Post<TReq>(string url, TReq requestBody);
     }
 }

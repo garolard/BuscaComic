@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,21 +21,27 @@ namespace BuscaComic.Core.Infraestructure.Impl
             }
         }
 
-        public async Task<TRes> Get<TRes>(string url)
+        public async Task<string> Get(string url)
         {
+            Client.DefaultRequestHeaders.Clear();
+            Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
             var response = await Client.GetAsync(url);
-            var content = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<TRes>(content);
+
+            return await response.Content.ReadAsStringAsync();
         }
 
-        public async Task<TRes> Post<TRes, TReq>(string url, TReq requestBody)
+        public async Task<string> Post<TReq>(string url, TReq requestBody)
         {
+            Client.DefaultRequestHeaders.Clear();
+            Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
             var body = JsonConvert.SerializeObject(requestBody);
             var content = new StringContent(body, Encoding.UTF8, "application/json");
 
             var response = await Client.PostAsync(url, content);
-            var responseContent = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<TRes>(responseContent);
+
+            return await response.Content.ReadAsStringAsync();
         }
     }
 }

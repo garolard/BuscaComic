@@ -12,7 +12,7 @@ namespace BuscaComic.Core
         private static AppSettingsManager instance;
         private readonly JObject secrets;
 
-        private const string Namespace = "BuscaComic";
+        private const string Namespace = "BuscaComic.Core";
         private const string Filename = "appsettings.json";
 
         public AppSettingsManager()
