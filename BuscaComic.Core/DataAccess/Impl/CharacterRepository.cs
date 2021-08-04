@@ -1,28 +1,26 @@
 ﻿using BuscaComic.Core.Infraestructure;
-using BuscaComic.Core.Infraestructure.Impl;
 using BuscaComic.Core.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BuscaComic.Core.DataAccess.Impl
 {
-    public class MarvelRepository : IMarvelRepository
+    public class CharacterRepository : ICharacterRepository
     {
         private readonly AppSettingsManager settings;
         private readonly IRestFacade facade;
 
-        public MarvelRepository(AppSettingsManager settings, IRestFacade facade)
+        public CharacterRepository(AppSettingsManager settings, IRestFacade facade)
         {
             this.settings = settings;
             this.facade = facade;
         }
 
-        public async Task<CharacterSearch> SearchCharactersByName(string name)
+        public async Task<Character[]> SearchCharactersByName(string name)
         {
             var ts = DateTime.Now.Ticks.ToString();
             var publicKey = settings["PublicKey"];
@@ -33,7 +31,8 @@ namespace BuscaComic.Core.DataAccess.Impl
                 $"name={Uri.EscapeUriString(name)}";
 
             var res = await facade.Get(url);
-            return TryParseResponse<CharacterSearch>(res);
+            var apiObject = TryParseResponse<CharacterSearch>(res);
+            return apiObject.Data.Results;
         }
 
         private string GenerateHash(string timestamp, string publicKey, string privateKey)
@@ -57,7 +56,11 @@ namespace BuscaComic.Core.DataAccess.Impl
 
         private void TranslateAndThrowError(JObject json)
         {
-            throw new InvalidOperationException(json["message"].ToString());
+            if (json.ContainsKey("status"))
+                throw new InvalidOperationException(json["status"].ToString());
+
+            if (json.ContainsKey("message"))
+                throw new InvalidOperationException(json["message"].ToString());
         }
     }
 }

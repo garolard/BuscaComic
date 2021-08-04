@@ -1,10 +1,10 @@
-﻿using BuscaComic.Core.DataAccess;
-using BuscaComic.Core.DataAccess.Impl;
-using BuscaComic.Core.Infraestructure;
+﻿using BuscaComic.Core.Infraestructure;
 using BuscaComic.Core.Infraestructure.Impl;
 using BuscaComic.Core.ViewModels;
 using MvvmCross;
+using MvvmCross.IoC;
 using MvvmCross.ViewModels;
+using System.Linq;
 
 namespace BuscaComic.Core
 {
@@ -16,7 +16,13 @@ namespace BuscaComic.Core
             Mvx.IoCProvider.RegisterSingleton(new AppSettingsManager());
             Mvx.IoCProvider.RegisterSingleton<IRestFacade>(new RestFacade());
 
-            Mvx.IoCProvider.RegisterType<IMarvelRepository, MarvelRepository>();
+            var typesToRegister = CreatableTypes().EndingWith("Repository")
+                .Union(CreatableTypes().EndingWith("Mapper"))
+                .Union(CreatableTypes().EndingWith("Service"));
+
+            typesToRegister
+                .AsInterfaces()
+                .RegisterAsLazySingleton();
 
             // Registrar ViewModel inicial
             RegisterAppStart<MainViewModel>();

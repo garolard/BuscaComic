@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 
 namespace BuscaComic.Core.DataAccess
 {
-    public interface IMarvelRepository
+    public interface ICharacterRepository
     {
-        Task<CharacterSearch> SearchCharactersByName(string name);
+        Task<Character[]> SearchCharactersByName(string name);
     }
 }

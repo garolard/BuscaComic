@@ -30,12 +30,12 @@ namespace BuscaComic.Core.Models
         public int Count { get; set; }
 
         [JsonProperty("results")]
-        public Result[] Results { get; set; }
+        public Character[] Results { get; set; }
     }
 
     // Esta entidad viene con bastantes más propiedades
     // para para hacer algo no demasiado complejo me vale con estas
-    public partial class Result
+    public partial class Character
     {
         [JsonProperty("id")]
         public int Id { get; set; }

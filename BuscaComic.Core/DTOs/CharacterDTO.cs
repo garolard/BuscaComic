@@ -1,6 +1,6 @@
-﻿namespace BuscaComic.Core.Models
+﻿namespace BuscaComic.Core.DTOs
 {
-    public class Character
+    public class CharacterDTO
     {
         public string Name { get; set; }
         public string Description { get; set; }
