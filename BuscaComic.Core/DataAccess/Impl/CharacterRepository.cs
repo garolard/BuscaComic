@@ -1,4 +1,5 @@
-﻿using BuscaComic.Core.Infraestructure;
+﻿using BuscaComic.Core.Common.DBC;
+using BuscaComic.Core.Infraestructure;
 using BuscaComic.Core.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -37,7 +38,9 @@ namespace BuscaComic.Core.DataAccess.Impl
 
         private string GenerateHash(string timestamp, string publicKey, string privateKey)
         {
-            // ¿Quizá un Check.Require para que los parámetros no vengan vacíos?
+            Check.Require(!string.IsNullOrEmpty(timestamp));
+            Check.Require(!string.IsNullOrEmpty(publicKey), "Hay que definir un PublicKey en appsettings.json");
+            Check.Require(!string.IsNullOrEmpty(privateKey), "Hay que definir un PrivateKey en appsettings.json");
 
             byte[] bytes = Encoding.UTF8.GetBytes(timestamp + privateKey + publicKey);
             var generator = MD5.Create();

@@ -2,6 +2,11 @@
 {
     public class Check
     {
+        public static void Require(bool precondition)
+        {
+            Require(precondition, string.Empty);
+        }
+
         public static void Require(bool precondition, string message)
         {
             if (!precondition)
