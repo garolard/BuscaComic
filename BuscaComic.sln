@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31410.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuscaComic.Core", "BuscaComic.Core\BuscaComic.Core.csproj", "{C265ED6B-F47B-484E-8DAB-DDA0E68F8C19}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuscaComic.Core", "BuscaComic.Core\BuscaComic.Core.csproj", "{C265ED6B-F47B-484E-8DAB-DDA0E68F8C19}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuscaComic.Droid", "BuscaComic.Droid\BuscaComic.Droid.csproj", "{43DD62B8-14BC-472F-B777-B308F70147D7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuscaComic.iOS", "BuscaComic.iOS\BuscaComic.iOS.csproj", "{27705EA0-3A0E-4AE2-97A6-4FA4F887D33A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuscaComic.Test", "BuscaComic.Test\BuscaComic.Test.csproj", "{5E22ECD1-CC2C-4DD4-B5F8-3383750C59F0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +61,18 @@ Global
 		{27705EA0-3A0E-4AE2-97A6-4FA4F887D33A}.Release|iPhone.Build.0 = Release|iPhone
 		{27705EA0-3A0E-4AE2-97A6-4FA4F887D33A}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
 		{27705EA0-3A0E-4AE2-97A6-4FA4F887D33A}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{5E22ECD1-CC2C-4DD4-B5F8-3383750C59F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E22ECD1-CC2C-4DD4-B5F8-3383750C59F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E22ECD1-CC2C-4DD4-B5F8-3383750C59F0}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{5E22ECD1-CC2C-4DD4-B5F8-3383750C59F0}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{5E22ECD1-CC2C-4DD4-B5F8-3383750C59F0}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{5E22ECD1-CC2C-4DD4-B5F8-3383750C59F0}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{5E22ECD1-CC2C-4DD4-B5F8-3383750C59F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E22ECD1-CC2C-4DD4-B5F8-3383750C59F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E22ECD1-CC2C-4DD4-B5F8-3383750C59F0}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{5E22ECD1-CC2C-4DD4-B5F8-3383750C59F0}.Release|iPhone.Build.0 = Release|Any CPU
+		{5E22ECD1-CC2C-4DD4-B5F8-3383750C59F0}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{5E22ECD1-CC2C-4DD4-B5F8-3383750C59F0}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
