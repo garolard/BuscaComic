@@ -1,4 +1,6 @@
 ﻿using Newtonsoft.Json;
+using System;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -27,7 +29,6 @@ namespace BuscaComic.Core.Infraestructure.Impl
             Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             var response = await Client.GetAsync(url);
-
             return await response.Content.ReadAsStringAsync();
         }
 
