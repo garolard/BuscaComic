@@ -1,6 +1,6 @@
 ﻿namespace BuscaComic.Core.DTOs
 {
-    public class CharacterDTO
+    public class ComicInListDTO : IElementInListDTO
     {
         public string Name { get; set; }
         public string Description { get; set; }

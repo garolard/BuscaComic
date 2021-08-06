@@ -1,7 +1,6 @@
 ﻿using BuscaComic.Core.DTOs;
 using BuscaComic.Core.Services;
 using MvvmCross.ViewModels;
-using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -9,9 +8,9 @@ namespace BuscaComic.Core.ViewModels
 {
     public class MainViewModel : MvxViewModel
     {
-        private readonly ICharacterService service;
+        private readonly ISearchService service;
 
-        public MainViewModel(ICharacterService service)
+        public MainViewModel(ISearchService service)
         {
             this.service = service;
         }
@@ -19,11 +18,11 @@ namespace BuscaComic.Core.ViewModels
         public async override Task Initialize()
         {
             await base.Initialize();
-            SearchResults = await service.SearchCharactersByName("captain america");
+            SearchResults = await service.Search("captain america");
         }
 
-        private IEnumerable<CharacterDTO> searchResults;
-        public IEnumerable<CharacterDTO> SearchResults
+        private IEnumerable<IElementInListDTO> searchResults;
+        public IEnumerable<IElementInListDTO> SearchResults
         {
             get => searchResults;
             set

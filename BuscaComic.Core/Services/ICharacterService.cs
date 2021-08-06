@@ -5,6 +5,6 @@ namespace BuscaComic.Core.Services
 {
     public interface ICharacterService
     {
-        Task<CharacterDTO[]> SearchCharactersByName(string name);
+        Task<CharacterInListDTO[]> SearchCharactersByName(string name);
     }
 }

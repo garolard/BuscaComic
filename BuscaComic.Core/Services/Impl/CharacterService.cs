@@ -10,15 +10,15 @@ namespace BuscaComic.Core.Services.Impl
     public class CharacterService : ICharacterService
     {
         private readonly ICharacterRepository repository;
-        private readonly IMapper<Character, CharacterDTO> mapper;
+        private readonly IMapper<Character, CharacterInListDTO> mapper;
 
-        public CharacterService(ICharacterRepository repository, IMapper<Character, CharacterDTO> mapper)
+        public CharacterService(ICharacterRepository repository, IMapper<Character, CharacterInListDTO> mapper)
         {
             this.repository = repository;
             this.mapper = mapper;
         }
 
-        public async Task<CharacterDTO[]> SearchCharactersByName(string name)
+        public async Task<CharacterInListDTO[]> SearchCharactersByName(string name)
         {
             var result = await repository.SearchCharactersByName(name);
             return result.Select(mapper.Map).ToArray();

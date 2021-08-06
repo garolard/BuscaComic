@@ -10,11 +10,11 @@ namespace BuscaComic.Test.Mappers
 {
     public class CharacterToCharacterDTOMapperSpecs
     {
-        private readonly IMapper<Character, CharacterDTO> mapper;
+        private readonly IMapper<Character, CharacterInListDTO> mapper;
 
         public CharacterToCharacterDTOMapperSpecs()
         {
-            mapper = new CharacterToCharacterDTOMapper();
+            mapper = new CharacterToCharacterInListDTOMapper();
         }
 
         [Fact]

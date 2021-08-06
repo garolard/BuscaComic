@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace BuscaComic.Core.DataAccess
 {
-    interface IComicRepository
+    public interface IComicRepository
     {
         Task<Comic[]> SearchComicsByName(string name);
     }

@@ -1,7 +1,6 @@
 ﻿using BuscaComic.Core.Helpers;
 using BuscaComic.Core.Infrastructure;
 using BuscaComic.Core.Models;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

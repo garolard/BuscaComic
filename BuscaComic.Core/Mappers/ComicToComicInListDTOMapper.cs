@@ -3,13 +3,13 @@ using BuscaComic.Core.Models;
 
 namespace BuscaComic.Core.Mappers
 {
-    public class CharacterToCharacterDTOMapper : IMapper<Character, CharacterDTO>
+    public class ComicToComicInListDTOMapper : IMapper<Comic, ComicInListDTO>
     {
-        public CharacterDTO Map(Character source)
+        public ComicInListDTO Map(Comic source)
         {
-            return new CharacterDTO
+            return new ComicInListDTO
             {
-                Name = source.Name,
+                Name = source.Title,
                 Description = source.Description,
                 ImageUrl = $"{source.Thumbnail.Path}.{source.Thumbnail.Extension}"
             };
