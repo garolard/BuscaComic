@@ -1,16 +1,15 @@
-﻿using BuscaComic.Core.Infraestructure;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 
-namespace BuscaComic.Core
+namespace BuscaComic.Core.Infrastructure.Impl
 {
     public class AppSettingsManager : IAppSettingsManager
     {
         private static AppSettingsManager instance;
-        private readonly JObject secrets;
+        protected JObject secrets;
 
         private const string Namespace = "BuscaComic.Core";
         private const string Filename = "appsettings.json";
@@ -27,7 +26,7 @@ namespace BuscaComic.Core
             }
         }
 
-        public static AppSettingsManager Settings
+        public static AppSettingsManager Instance
         {
             get
             {

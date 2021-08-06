@@ -1,51 +1,35 @@
-﻿using BuscaComic.Core.Common.DBC;
-using BuscaComic.Core.Infraestructure;
+﻿using BuscaComic.Core.Helpers;
+using BuscaComic.Core.Infrastructure;
 using BuscaComic.Core.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Security.Cryptography;
-using System.Text;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace BuscaComic.Core.DataAccess.Impl
 {
     public class CharacterRepository : ICharacterRepository
     {
-        private readonly AppSettingsManager settings;
         private readonly IRestFacade facade;
+        private readonly RestHelpers helpers;
 
-        public CharacterRepository(AppSettingsManager settings, IRestFacade facade)
+        public CharacterRepository(IRestFacade facade, RestHelpers helpers)
         {
-            this.settings = settings;
             this.facade = facade;
+            this.helpers = helpers;
         }
 
         public async Task<Character[]> SearchCharactersByName(string name)
         {
-            var ts = DateTime.Now.Ticks.ToString();
-            var publicKey = settings["PublicKey"];
-            var privateKey = settings["PrivateKey"];
-            var hash = GenerateHash(ts, publicKey, privateKey);
-
-            var url = $"{settings["BaseUrl"]}characters?ts={ts}&apikey={publicKey}&hash={hash}&" +
-                $"name={Uri.EscapeUriString(name)}";
+            var url = helpers.GetApiUrl("characters", new Dictionary<string, object>
+            {
+                { "name", name }
+            });
 
             var res = await facade.Get(url);
-            var apiObject = TryParseResponse<CharacterSearch>(res);
+            var apiObject = TryParseResponse<ApiResponseWrapper<Character>>(res);
             return apiObject.Data.Results;
-        }
-
-        private string GenerateHash(string timestamp, string publicKey, string privateKey)
-        {
-            Check.Require(!string.IsNullOrEmpty(timestamp));
-            Check.Require(!string.IsNullOrEmpty(publicKey), "Hay que definir un PublicKey en appsettings.json");
-            Check.Require(!string.IsNullOrEmpty(privateKey), "Hay que definir un PrivateKey en appsettings.json");
-
-            byte[] bytes = Encoding.UTF8.GetBytes(timestamp + privateKey + publicKey);
-            var generator = MD5.Create();
-            byte[] byteHash = generator.ComputeHash(bytes);
-            return BitConverter.ToString(byteHash).ToLower().Replace("-", "");
         }
 
         private T TryParseResponse<T>(string res)

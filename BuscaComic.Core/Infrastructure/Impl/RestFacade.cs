@@ -6,7 +6,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BuscaComic.Core.Infraestructure.Impl
+namespace BuscaComic.Core.Infrastructure.Impl
 {
     public class RestFacade : IRestFacade
     {

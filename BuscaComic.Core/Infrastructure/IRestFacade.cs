@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace BuscaComic.Core.Infraestructure
+namespace BuscaComic.Core.Infrastructure
 {
     public interface IRestFacade
     {

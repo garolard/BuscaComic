@@ -1,4 +1,4 @@
-﻿namespace BuscaComic.Core.Infraestructure
+﻿namespace BuscaComic.Core.Infrastructure
 {
     public interface IAppSettingsManager
     {

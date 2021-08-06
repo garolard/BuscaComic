@@ -1,5 +1,6 @@
-﻿using BuscaComic.Core.Infraestructure;
-using BuscaComic.Core.Infraestructure.Impl;
+﻿using BuscaComic.Core.Helpers;
+using BuscaComic.Core.Infrastructure;
+using BuscaComic.Core.Infrastructure.Impl;
 using BuscaComic.Core.ViewModels;
 using MvvmCross;
 using MvvmCross.IoC;
@@ -15,6 +16,8 @@ namespace BuscaComic.Core
             // Registrar dependencias
             Mvx.IoCProvider.RegisterSingleton(new AppSettingsManager());
             Mvx.IoCProvider.RegisterSingleton<IRestFacade>(new RestFacade());
+
+            Mvx.IoCProvider.RegisterSingleton(new RestHelpers());
 
             var typesToRegister = CreatableTypes().EndingWith("Repository")
                 .Union(CreatableTypes().EndingWith("Mapper"))
