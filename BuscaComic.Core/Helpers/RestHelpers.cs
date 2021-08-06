@@ -1,6 +1,8 @@
 ﻿using BuscaComic.Core.Common.DBC;
 using BuscaComic.Core.Infrastructure;
 using BuscaComic.Core.Infrastructure.Impl;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,6 +62,24 @@ namespace BuscaComic.Core.Helpers
             var generator = MD5.Create();
             byte[] byteHash = generator.ComputeHash(bytes);
             return BitConverter.ToString(byteHash).ToLower().Replace("-", "");
+        }
+
+        public T TryParseResponse<T>(string res)
+        {
+            var json = JObject.Parse(res);
+            if (json["code"].ToString() != "200")
+                TranslateAndThrowError(json);
+
+            return JsonConvert.DeserializeObject<T>(res);
+        }
+
+        private void TranslateAndThrowError(JObject json)
+        {
+            if (json.ContainsKey("status"))
+                throw new InvalidOperationException(json["status"].ToString());
+
+            if (json.ContainsKey("message"))
+                throw new InvalidOperationException(json["message"].ToString());
         }
     }
 }

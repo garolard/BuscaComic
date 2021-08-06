@@ -28,26 +28,8 @@ namespace BuscaComic.Core.DataAccess.Impl
             });
 
             var res = await facade.Get(url);
-            var apiObject = TryParseResponse<ApiResponseWrapper<Character>>(res);
+            var apiObject = helpers.TryParseResponse<ApiResponseWrapper<Character>>(res);
             return apiObject.Data.Results;
-        }
-
-        private T TryParseResponse<T>(string res)
-        {
-            var json = JObject.Parse(res);
-            if (json["code"].ToString() != "200")
-                TranslateAndThrowError(json);
-
-            return JsonConvert.DeserializeObject<T>(res);
-        }
-
-        private void TranslateAndThrowError(JObject json)
-        {
-            if (json.ContainsKey("status"))
-                throw new InvalidOperationException(json["status"].ToString());
-
-            if (json.ContainsKey("message"))
-                throw new InvalidOperationException(json["message"].ToString());
         }
     }
 }

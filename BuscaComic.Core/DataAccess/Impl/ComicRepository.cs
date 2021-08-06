@@ -1,6 +1,8 @@
-﻿using BuscaComic.Core.Infrastructure;
+﻿using BuscaComic.Core.Helpers;
+using BuscaComic.Core.Infrastructure;
 using BuscaComic.Core.Models;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace BuscaComic.Core.DataAccess.Impl
@@ -8,15 +10,24 @@ namespace BuscaComic.Core.DataAccess.Impl
     public class ComicRepository : IComicRepository
     {
         private readonly IRestFacade facade;
+        private readonly RestHelpers helpers;
 
-        public ComicRepository(IRestFacade facade)
+        public ComicRepository(IRestFacade facade, RestHelpers helpers)
         {
             this.facade = facade;
+            this.helpers = helpers;
         }
 
         public async Task<Comic[]> SearchComicsByName(string name)
         {
-            return null;
+            var url = helpers.GetApiUrl("comics", new Dictionary<string, object>
+            {
+                { "title", name }
+            });
+
+            var res = await facade.Get(url);
+            var apiObject = helpers.TryParseResponse<ApiResponseWrapper<Comic>>(res);
+            return apiObject.Data.Results;
         }
     }
 }
