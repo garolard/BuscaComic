@@ -5,9 +5,23 @@
     xmlns:local="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <EditText
+        android:id="@+id/search_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        local:MvxBind="Text SearchTerm" />
     <MvvmCross.DroidX.RecyclerView.MvxRecyclerView
+        android:layout_below="@id/search_input"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         local:MvxItemTemplate="@layout/main_search_item_view"
-        local:MvxBind="ItemsSource SearchResults" />
+        local:MvxBind="ItemsSource SearchResults; ItemClick ItemClickedCommand" />
+    <ProgressBar
+       android:id="@+id/loading_spinner"
+       style="?android:attr/progressBarStyleLarge"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_centerHorizontal="true"
+       android:layout_centerVertical="true"
+        local:MvxBind="Visible TaskNotifier.IsNotCompleted"/>
 </RelativeLayout>

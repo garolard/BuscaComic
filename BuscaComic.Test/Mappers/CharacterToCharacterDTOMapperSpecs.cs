@@ -2,8 +2,6 @@
 using BuscaComic.Core.Mappers;
 using BuscaComic.Core.Models;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace BuscaComic.Test.Mappers
@@ -26,6 +24,7 @@ namespace BuscaComic.Test.Mappers
             Assert.Equal(character.Name, dto.Name);
             Assert.Equal(character.Description, dto.Description);
             Assert.Equal($"{character.Thumbnail.Path}.{character.Thumbnail.Extension}", dto.ImageUrl);
+            Assert.Equal(ItemType.Character, dto.Type);
         }
 
         private Character Character()

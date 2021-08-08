@@ -66,6 +66,7 @@
     <Compile Include="MainApplication.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\DetailActivity.cs" />
     <Compile Include="Views\MainActivity.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -121,6 +122,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\main_search_item_view.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\activity_detail.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

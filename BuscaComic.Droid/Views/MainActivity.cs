@@ -5,7 +5,7 @@ using MvvmCross.Platforms.Android.Views;
 
 namespace BuscaComic.Droid.Views
 {
-    [Activity(Label = "MainActivity", MainLauncher = true)]
+    [Activity(Label = "Buscador", MainLauncher = true)]
     public class MainActivity : MvxActivity<MainViewModel>
     {
         protected override void OnCreate(Bundle savedInstanceState)

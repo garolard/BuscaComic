@@ -11,7 +11,8 @@ namespace BuscaComic.Core.Mappers
             {
                 Name = source.Title,
                 Description = source.Description,
-                ImageUrl = $"{source.Thumbnail.Path}.{source.Thumbnail.Extension}"
+                ImageUrl = $"{source.Thumbnail.Path}.{source.Thumbnail.Extension}",
+                Type = ItemType.Comic
             };
         }
     }
