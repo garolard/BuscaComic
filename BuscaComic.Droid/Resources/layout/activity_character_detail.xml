@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:local="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="8sp">
     <ImageView
         android:id="@+id/detail_cover"
         android:layout_alignParentLeft="true"
@@ -27,4 +28,19 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8sp"
         local:MvxBind="Text Description" />
+
+    <TextView
+        android:id="@+id/events_title"
+        android:layout_below="@id/detail_cover"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8sp"
+        android:text="Participa en:"/>
+    <MvvmCross.DroidX.RecyclerView.MvxRecyclerView
+        android:layout_below="@id/events_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        local:MvxItemTemplate="@layout/event_item_view"
+        local:MvxBind="ItemsSource Events" />
+
 </RelativeLayout>

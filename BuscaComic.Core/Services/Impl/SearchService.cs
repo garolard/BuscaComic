@@ -2,10 +2,8 @@
 using BuscaComic.Core.DTOs;
 using BuscaComic.Core.Mappers;
 using BuscaComic.Core.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BuscaComic.Core.Services.Impl
@@ -17,15 +15,22 @@ namespace BuscaComic.Core.Services.Impl
         private readonly IMapper<Character, CharacterInListDTO> characterMapper;
         private readonly IMapper<Character, CharacterDetailDTO> characterDetailMapper;
         private readonly IMapper<Comic, ComicInListDTO> comicMaper;
+        private readonly IMapper<Comic, ComicDetailDTO> comicDetailMapper;
 
 
-        public SearchService(IComicRepository comicRepository, ICharacterRepository characterRepository, IMapper<Character, CharacterInListDTO> characterMapper, IMapper<Comic, ComicInListDTO> comicMaper, IMapper<Character, CharacterDetailDTO> characterDetailMapper)
+        public SearchService(IComicRepository comicRepository, 
+            ICharacterRepository characterRepository, 
+            IMapper<Character, CharacterInListDTO> characterMapper, 
+            IMapper<Comic, ComicInListDTO> comicMaper, 
+            IMapper<Character, CharacterDetailDTO> characterDetailMapper, 
+            IMapper<Comic, ComicDetailDTO> comicDetailMapper)
         {
             this.comicRepository = comicRepository;
             this.characterRepository = characterRepository;
             this.characterMapper = characterMapper;
             this.comicMaper = comicMaper;
             this.characterDetailMapper = characterDetailMapper;
+            this.comicDetailMapper = comicDetailMapper;
         }
 
         public async Task<IEnumerable<IElementInListDTO>> Search(string query)
@@ -46,9 +51,10 @@ namespace BuscaComic.Core.Services.Impl
             return characterDetailMapper.Map(character);
         }
 
-        public Task<ComicDetailDTO> GetComicById(int id)
+        public async Task<ComicDetailDTO> GetComicById(int id)
         {
-            throw new NotImplementedException();
+            var comic = await comicRepository.FindById(id);
+            return comicDetailMapper.Map(comic);
         }
     }
 }

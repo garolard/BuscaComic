@@ -28,5 +28,14 @@ namespace BuscaComic.Core.DataAccess.Impl
             var apiObject = helpers.TryParseResponse<ApiResponseWrapper<Comic>>(res);
             return apiObject.Data.Results;
         }
+
+        public async Task<Comic> FindById(int id)
+        {
+            var url = helpers.GetApiUrl($"comics/{id}");
+
+            var res = await facade.Get(url);
+            var apiObject = helpers.TryParseResponse<ApiResponseWrapper<Comic>>(res);
+            return apiObject.Data.Results[0];
+        }
     }
 }

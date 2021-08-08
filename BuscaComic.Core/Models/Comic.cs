@@ -45,13 +45,13 @@ namespace BuscaComic.Core.Models
         public Uri CollectionUri { get; set; }
 
         [JsonProperty("items")]
-        public Series[] Items { get; set; }
+        public CharacterInDetail[] Items { get; set; }
 
         [JsonProperty("returned")]
         public int Returned { get; set; }
     }
 
-    public partial class Series
+    public partial class CharacterInDetail
     {
         [JsonProperty("resourceURI")]
         public Uri ResourceUri { get; set; }
