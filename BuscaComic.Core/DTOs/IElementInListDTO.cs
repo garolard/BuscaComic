@@ -9,6 +9,7 @@
 
     public interface IElementInListDTO
     {
+        int Id { get; set; }
         string Name { get; }
         string Description { get; }
         string ImageUrl { get; }

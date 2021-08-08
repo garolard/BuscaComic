@@ -15,14 +15,17 @@ namespace BuscaComic.Core.Services.Impl
         private readonly IComicRepository comicRepository;
         private readonly ICharacterRepository characterRepository;
         private readonly IMapper<Character, CharacterInListDTO> characterMapper;
+        private readonly IMapper<Character, CharacterDetailDTO> characterDetailMapper;
         private readonly IMapper<Comic, ComicInListDTO> comicMaper;
 
-        public SearchService(IComicRepository comicRepository, ICharacterRepository characterRepository, IMapper<Character, CharacterInListDTO> characterMapper, IMapper<Comic, ComicInListDTO> comicMaper)
+
+        public SearchService(IComicRepository comicRepository, ICharacterRepository characterRepository, IMapper<Character, CharacterInListDTO> characterMapper, IMapper<Comic, ComicInListDTO> comicMaper, IMapper<Character, CharacterDetailDTO> characterDetailMapper)
         {
             this.comicRepository = comicRepository;
             this.characterRepository = characterRepository;
             this.characterMapper = characterMapper;
             this.comicMaper = comicMaper;
+            this.characterDetailMapper = characterDetailMapper;
         }
 
         public async Task<IEnumerable<IElementInListDTO>> Search(string query)
@@ -35,6 +38,17 @@ namespace BuscaComic.Core.Services.Impl
             return characters.Select(characterMapper.Map)
                 .AsEnumerable<IElementInListDTO>()
                 .Concat(comics.Select(comicMaper.Map));
+        }
+
+        public async Task<CharacterDetailDTO> GetCharacterById(int id)
+        {
+            var character = await characterRepository.FindById(id);
+            return characterDetailMapper.Map(character);
+        }
+
+        public Task<ComicDetailDTO> GetComicById(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

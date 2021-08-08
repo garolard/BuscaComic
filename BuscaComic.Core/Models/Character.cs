@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace BuscaComic.Core.Models
@@ -18,6 +19,9 @@ namespace BuscaComic.Core.Models
 
         [JsonProperty("thumbnail")]
         public Thumbnail Thumbnail { get; set; }
+
+        [JsonProperty("events")]
+        public EventArray Events { get; set; }
     }
 
     public class Thumbnail
@@ -27,5 +31,17 @@ namespace BuscaComic.Core.Models
 
         [JsonProperty("extension")]
         public string Extension { get; set; }
+    }
+
+    public class EventArray
+    {
+        [JsonProperty("items")]
+        public IEnumerable<Event> Items { get; set; }
+    }
+
+    public class Event
+    {
+        [JsonProperty("name")]
+        public string Name { get; set; }
     }
 }

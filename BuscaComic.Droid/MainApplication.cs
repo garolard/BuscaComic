@@ -4,6 +4,8 @@ using BuscaComic.Core;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Platforms.Android.Core;
 using MvvmCross.Platforms.Android.Views;
+using Serilog;
+using Serilog.Extensions.Logging;
 using System;
 
 namespace BuscaComic.Droid
@@ -16,12 +18,18 @@ namespace BuscaComic.Droid
 
         protected override ILoggerFactory CreateLogFactory()
         {
-            return null;
+            // serilog configuration
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                // add more sinks here
+                .CreateLogger();
+
+            return new SerilogLoggerFactory();
         }
 
         protected override ILoggerProvider CreateLogProvider()
         {
-            return null;
+            return new SerilogLoggerProvider();
         }
     }
 

@@ -1,6 +1,8 @@
 ﻿using BuscaComic.Core.DTOs;
 using BuscaComic.Core.Services;
 using MvvmCross.ViewModels;
+using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace BuscaComic.Core.ViewModels
@@ -24,6 +26,9 @@ namespace BuscaComic.Core.ViewModels
         public async override Task Initialize()
         {
             await base.Initialize();
+            var detail = await searchService.GetCharacterById(param.Id);
+            Description = detail.Description;
+            Events = detail.Events;
         }
 
         public string ImageUrl
@@ -34,6 +39,20 @@ namespace BuscaComic.Core.ViewModels
         public string Name
         {
             get => param.Name;
+        }
+
+        private string description;
+        public string Description
+        {
+            get => description;
+            set => SetProperty(ref description, value);
+        }
+
+        private IEnumerable<EventDTO> events;
+        public IEnumerable<EventDTO> Events
+        {
+            get => events;
+            set => SetProperty(ref events, value);
         }
     }
 }

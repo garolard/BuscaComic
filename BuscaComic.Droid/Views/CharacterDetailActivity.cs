@@ -1,6 +1,7 @@
 ﻿using Android.App;
 using Android.OS;
 using BuscaComic.Core.ViewModels;
+using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Views;
 
 namespace BuscaComic.Droid.Views
@@ -14,6 +15,7 @@ namespace BuscaComic.Droid.Views
 
             // Create your application here
             SetContentView(Resource.Layout.activity_character_detail);
+            this.CreateBinding().For("Title").To<CharacterDetailViewModel>(vn => vn.Name).Apply();
         }
     }
 }

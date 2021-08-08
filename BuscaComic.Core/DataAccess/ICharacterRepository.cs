@@ -6,5 +6,6 @@ namespace BuscaComic.Core.DataAccess
     public interface ICharacterRepository
     {
         Task<Character[]> SearchCharactersByName(string name);
+        Task<Character> FindById(int id);
     }
 }

@@ -21,6 +21,7 @@ namespace BuscaComic.Test.Mappers
             var character = Character();
             var dto = mapper.Map(character);
 
+            Assert.Equal(character.Id, dto.Id);
             Assert.Equal(character.Name, dto.Name);
             Assert.Equal(character.Description, dto.Description);
             Assert.Equal($"{character.Thumbnail.Path}.{character.Thumbnail.Extension}", dto.ImageUrl);

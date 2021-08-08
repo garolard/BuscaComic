@@ -9,6 +9,7 @@
         android:id="@+id/search_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="Captain America"
         local:MvxBind="Text SearchTerm" />
     <MvvmCross.DroidX.RecyclerView.MvxRecyclerView
         android:layout_below="@id/search_input"

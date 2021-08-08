@@ -25,6 +25,11 @@ namespace BuscaComic.Core.Helpers
             this.settings = settings;
         }
 
+        public string GetApiUrl(string endpoint)
+        {
+            return GetApiUrl(endpoint, new Dictionary<string, object>());
+        }
+
         public string GetApiUrl(string endpoint, IDictionary<string, object> urlParams)
         {
             Check.Require(!string.IsNullOrEmpty(endpoint), "No se puede construir una URL de API válida sin un endpoint");

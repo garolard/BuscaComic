@@ -23,10 +23,9 @@ namespace BuscaComic.Core.ViewModels
             this.navigationService = navigationService;
         }
 
-        public async override Task Initialize()
+        public override Task Initialize()
         {
-            await base.Initialize();
-            SearchTerm = "Captain America";
+            return base.Initialize();
         }
 
         private IEnumerable<IElementInListDTO> searchResults;

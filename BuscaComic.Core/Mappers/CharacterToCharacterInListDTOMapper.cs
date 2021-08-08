@@ -9,6 +9,7 @@ namespace BuscaComic.Core.Mappers
         {
             return new CharacterInListDTO
             {
+                Id = source.Id,
                 Name = source.Name,
                 Description = source.Description,
                 ImageUrl = $"{source.Thumbnail.Path}.{source.Thumbnail.Extension}",
