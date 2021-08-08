@@ -11,19 +11,27 @@
             android:id="@+id/detail_cover"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_width="154sp"
+            android:layout_width="110sp"
             android:layout_height="wrap_content"
             android:scaleType="fitXY"
             android:adjustViewBounds="true"
             android:contentDescription=""
-            local:MvxBind="Bitmap ImageUrl, Converter=UrlToBitmap"/>
+            local:MvxBind="Bitmap ThumbnailUrl, Converter=UrlToBitmap"/>
         <TextView
-            android:id="@+id/char_detail_name"
+            android:id="@+id/comic_detail_name"
             android:layout_toRightOf="@id/detail_cover"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8sp"
             local:MvxBind="Text Name" />
+        <TextView
+            android:id="@+id/comic_format"
+            android:layout_toRightOf="@id/detail_cover"
+            android:layout_below="@id/comic_detail_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8sp"
+            local:MvxBind="Text Format" />
 
         <LinearLayout
             android:layout_below="@id/detail_cover"
@@ -38,13 +46,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8sp"
-                android:text="Involved in:"/>
+                android:text="Characters:"/>
             <MvvmCross.DroidX.RecyclerView.MvxRecyclerView
-                android:id="@+id/events_list"
+                android:id="@+id/characters_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 local:MvxItemTemplate="@layout/single_text_item_view"
-                local:MvxBind="ItemsSource Events" />
+                local:MvxBind="ItemsSource Characters" />
         </LinearLayout>
     </RelativeLayout>
 </ScrollView>

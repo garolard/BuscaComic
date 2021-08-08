@@ -15,6 +15,7 @@ namespace BuscaComic.Core.Mappers
                 Id = source.Id,
                 Title = source.Title,
                 Format = source.Format,
+                Description = source.Description,
                 // Si se mapearan mas propiedades debería sacar un mapper completo
                 // como con el mapper de personajes, de momento así me vale y me ahorro
                 // una dependencia

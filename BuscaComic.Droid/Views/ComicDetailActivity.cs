@@ -6,20 +6,20 @@ using MvvmCross.Platforms.Android.Views;
 
 namespace BuscaComic.Droid.Views
 {
-    [Activity(Label = "CharacterDetailActivity")]
-    public class CharacterDetailActivity : MvxActivity<CharacterDetailViewModel>
+    [Activity(Label = "ComicDetailActivity")]
+    public class ComicDetailActivity : MvxActivity<ComicDetailViewModel>
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
             // Create your application here
-            SetContentView(Resource.Layout.activity_character_detail);
-            this.CreateBinding().For("Title").To<CharacterDetailViewModel>(vn => vn.Name).Apply();
+            SetContentView(Resource.Layout.activity_comic_detail);
+            this.CreateBinding().For("Title").To<ComicDetailViewModel>(vn => vn.Name).Apply();
 
             // Trucar el focus request del listview para que la actividad no
             // empiece con un scroll raro
-            FindViewById(Resource.Id.events_list).SetFocusable(Android.Views.ViewFocusability.NotFocusable);
+            FindViewById(Resource.Id.characters_list).SetFocusable(Android.Views.ViewFocusability.NotFocusable);
         }
     }
 }

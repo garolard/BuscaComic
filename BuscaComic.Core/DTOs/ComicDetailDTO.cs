@@ -7,7 +7,7 @@ namespace BuscaComic.Core.DTOs
         public int Id { get; set; }
         public string Title { get; set; }
         public string Format { get; set; }
-        public IEnumerable<SerieDTO> Series { get; set; }
+        public string Description { get; set; }
         public IEnumerable<CharacterInListDTO> Characters { get; set; }
     }
 }

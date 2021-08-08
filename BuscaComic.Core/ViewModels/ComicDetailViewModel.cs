@@ -27,7 +27,8 @@ namespace BuscaComic.Core.ViewModels
             await base.Initialize();
             var detail = await searchService.GetComicById(param.Id);
             Format = detail.Format;
-            Character = detail.Characters;
+            Description = detail.Description;
+            Characters = detail.Characters;
         }
 
         public string ThumbnailUrl
@@ -47,11 +48,18 @@ namespace BuscaComic.Core.ViewModels
             set => SetProperty(ref format, value);
         }
 
-        public IEnumerable<CharacterInListDTO> character;
-        public IEnumerable<CharacterInListDTO> Character
+        private string description;
+        public string Description
         {
-            get => character;
-            set => SetProperty(ref character, value);
+            get => description;
+            set => SetProperty(ref description, value);
+        }
+
+        public IEnumerable<CharacterInListDTO> characters;
+        public IEnumerable<CharacterInListDTO> Characters
+        {
+            get => characters;
+            set => SetProperty(ref characters, value);
         }
     }
 }

@@ -67,6 +67,7 @@
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\CharacterDetailActivity.cs" />
+    <Compile Include="Views\ComicDetailActivity.cs" />
     <Compile Include="Views\MainActivity.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -138,6 +139,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\single_text_item_view.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\activity_comic_detail.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
