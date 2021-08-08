@@ -66,7 +66,21 @@ namespace BuscaComic.Core.ViewModels
         {
             get => new MvxAsyncCommand<IElementInListDTO>(async (item) =>
             {
-                await navigationService.Navigate<DetailViewModel, IElementInListDTO>(item);
+                // Esto se podría manejar mejor usando Fragments en una vista DetailActivity común
+                // y así si el día de mañana surge un tipo nuevo de item solo hay que implementar
+                // el fragment correspondiente.
+                switch (item.Type)
+                {
+                    case ItemType.Character:
+                        await navigationService.Navigate<CharacterDetailViewModel, CharacterInListDTO>(item as CharacterInListDTO);
+                        break;
+                    case ItemType.Comic:
+                        await navigationService.Navigate<ComicDetailViewModel, ComicInListDTO>(item as ComicInListDTO);
+                        break;
+                    default:
+                        return;
+                }
+                
             });
         }
 

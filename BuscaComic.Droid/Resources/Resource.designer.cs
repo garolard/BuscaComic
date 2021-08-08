@@ -17421,7 +17421,7 @@ namespace BuscaComic.Droid
 			public const int abc_tooltip = 2131427355;
 			
 			// aapt resource value: 0x7F0B001C
-			public const int activity_detail = 2131427356;
+			public const int activity_character_detail = 2131427356;
 			
 			// aapt resource value: 0x7F0B001D
 			public const int activity_main = 2131427357;
