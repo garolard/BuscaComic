@@ -137,7 +137,7 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\event_item_view.xml">
+    <AndroidResource Include="Resources\layout\single_text_item_view.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
