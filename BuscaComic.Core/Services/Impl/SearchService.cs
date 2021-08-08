@@ -1,4 +1,5 @@
-﻿using BuscaComic.Core.DataAccess;
+﻿using BuscaComic.Core.Common.DBC;
+using BuscaComic.Core.DataAccess;
 using BuscaComic.Core.DTOs;
 using BuscaComic.Core.Mappers;
 using BuscaComic.Core.Models;
@@ -35,6 +36,9 @@ namespace BuscaComic.Core.Services.Impl
 
         public async Task<IEnumerable<IElementInListDTO>> Search(string query)
         {
+            if (string.IsNullOrEmpty(query))
+                return Enumerable.Empty<IElementInListDTO>();
+
             // Esto seguro que podría tirarse mejor con un WaitAll aunque ahora mismo
             // no estoy seguro
             var characters = await characterRepository.SearchCharactersByName(query);
@@ -47,12 +51,16 @@ namespace BuscaComic.Core.Services.Impl
 
         public async Task<CharacterDetailDTO> GetCharacterById(int id)
         {
+            Check.Require(id > 0, "Id inválido");
+
             var character = await characterRepository.FindById(id);
             return characterDetailMapper.Map(character);
         }
 
         public async Task<ComicDetailDTO> GetComicById(int id)
         {
+            Check.Require(id > 0, "Id inválido");
+
             var comic = await comicRepository.FindById(id);
             return comicDetailMapper.Map(comic);
         }
