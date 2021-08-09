@@ -16,6 +16,7 @@ namespace BuscaComic.Core.Mappers
                 Title = source.Title,
                 Format = source.Format,
                 Description = source.Description,
+                ThumbnailUrl = $"{source.Thumbnail.Path}.{source.Thumbnail.Extension}",
                 // Si se mapearan mas propiedades debería sacar un mapper completo
                 // como con el mapper de personajes, de momento así me vale y me ahorro
                 // una dependencia

@@ -1,46 +1,32 @@
 ﻿using BuscaComic.Core.DTOs;
 using BuscaComic.Core.Mappers;
 using BuscaComic.Core.Models;
-using System;
+using BuscaComic.Test.Common;
 using Xunit;
 
 namespace BuscaComic.Test.Mappers
 {
     public class CharacterToCharacterInListDTOMapperSpecs
     {
+        private readonly ObjectMother db;
         private readonly IMapper<Character, CharacterInListDTO> mapper;
+                
+        [Fact]
+        public void Should_Map_A_Character()
+        {
+            var dto = mapper.Map(db.Thor);
+
+            Assert.Equal(db.Thor.Id, dto.Id);
+            Assert.Equal(db.Thor.Name, dto.Name);
+            Assert.Equal(db.Thor.Description, dto.Description);
+            Assert.Equal($"{db.Thor.Thumbnail.Path}.{db.Thor.Thumbnail.Extension}", dto.ImageUrl);
+            Assert.Equal(ItemType.Character, dto.Type);
+        }
 
         public CharacterToCharacterInListDTOMapperSpecs()
         {
             mapper = new CharacterToCharacterInListDTOMapper();
-        }
-
-        [Fact]
-        public void Should_Map_A_Filled_Character()
-        {
-            var character = Character();
-            var dto = mapper.Map(character);
-
-            Assert.Equal(character.Id, dto.Id);
-            Assert.Equal(character.Name, dto.Name);
-            Assert.Equal(character.Description, dto.Description);
-            Assert.Equal($"{character.Thumbnail.Path}.{character.Thumbnail.Extension}", dto.ImageUrl);
-            Assert.Equal(ItemType.Character, dto.Type);
-        }
-
-        private Character Character()
-        {
-            return new Character
-            {
-                Id = 1,
-                Name = "Captain America",
-                Description = "An American super-soldier",
-                Thumbnail = new Thumbnail
-                {
-                    Path = new Uri("https://placeholder.pics/svg/300"),
-                    Extension = "jpg"
-                }
-            };
+            db = new ObjectMother();
         }
     }
 }
