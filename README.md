@@ -14,8 +14,8 @@ de vistas de iOS en VS para Windows (https://docs.microsoft.com/es-es/xamarin/io
 
 ## Características que faltan
 Algunas características que quisiera haber implementado:
-	- Cacheo de imágenes y peticiones al API (usando SQLite, Realm, Monkey-Cache o algún otro)
-	- Uso de Fragments para manejar la navegación desde la vista de búsqueda a la de detalles
-	- Throttle del input al buscar, para ahorrar peticiones
-	- Mejor manejo de errores
-	- Mejor diseño
+- Cacheo de imágenes y peticiones al API (usando SQLite, Realm, Monkey-Cache o algún otro)
+- Uso de Fragments para manejar la navegación desde la vista de búsqueda a la de detalles
+- Throttle del input al buscar, para ahorrar peticiones
+- Mejor manejo de errores
+- Mejor diseño
