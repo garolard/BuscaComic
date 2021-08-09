@@ -1,8 +1,12 @@
 ﻿using BuscaComic.Core.DTOs;
 using BuscaComic.Core.Services;
+using MvvmCross.Commands;
 using MvvmCross.ViewModels;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace BuscaComic.Core.ViewModels
 {
@@ -25,10 +29,8 @@ namespace BuscaComic.Core.ViewModels
         public async override Task Initialize()
         {
             await base.Initialize();
-            var detail = await searchService.GetComicById(param.Id);
-            Format = detail.Format;
-            Description = detail.Description;
-            Characters = detail.Characters;
+            if (LoadComicCommand.CanExecute(null))
+                LoadComicCommand.Execute(null);
         }
 
         public string ThumbnailUrl
@@ -60,6 +62,32 @@ namespace BuscaComic.Core.ViewModels
         {
             get => characters;
             set => SetProperty(ref characters, value);
+        }
+
+        private MvxNotifyTask taskNotifier;
+        public MvxNotifyTask TaskNotifier
+        {
+            get => taskNotifier;
+            private set => SetProperty(ref taskNotifier, value);
+        }
+
+        public ICommand LoadComicCommand
+        {
+            get => new MvxCommand(() => TaskNotifier = MvxNotifyTask.Create(() => LoadComicAsync(), onException: ex => OnException(ex)));
+        }
+
+        private async Task LoadComicAsync()
+        {
+            var detail = await searchService.GetComicById(param.Id);
+            Format = detail.Format;
+            Description = detail.Description;
+            Characters = detail.Characters;
+        }
+
+        private void OnException(Exception exception)
+        {
+            // Obviamente esto habría que tratarlo de otra manera mejor
+            Debug.WriteLine(exception);
         }
     }
 }

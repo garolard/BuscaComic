@@ -1,8 +1,12 @@
 ﻿using BuscaComic.Core.DTOs;
 using BuscaComic.Core.Services;
+using MvvmCross.Commands;
 using MvvmCross.ViewModels;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace BuscaComic.Core.ViewModels
 {
@@ -25,9 +29,9 @@ namespace BuscaComic.Core.ViewModels
         public async override Task Initialize()
         {
             await base.Initialize();
-            var detail = await searchService.GetCharacterById(param.Id);
-            Description = detail.Description;
-            Events = detail.Events;
+
+            if (LoadCharacterCommand.CanExecute(null))
+                LoadCharacterCommand.Execute(null);
         }
 
         public string ImageUrl
@@ -52,6 +56,31 @@ namespace BuscaComic.Core.ViewModels
         {
             get => events;
             set => SetProperty(ref events, value);
+        }
+
+        private MvxNotifyTask taskNotifier;
+        public MvxNotifyTask TaskNotifier
+        {
+            get => taskNotifier;
+            private set => SetProperty(ref taskNotifier, value);
+        }
+
+        public ICommand LoadCharacterCommand
+        {
+            get => new MvxCommand(() => TaskNotifier = MvxNotifyTask.Create(() => LoadCharacterAsync(), onException: ex => OnException(ex)));
+        }
+
+        private async Task LoadCharacterAsync()
+        {
+            var detail = await searchService.GetCharacterById(param.Id);
+            Description = detail.Description;
+            Events = detail.Events;
+        }
+
+        private void OnException(Exception exception)
+        {
+            // Obviamente esto habría que tratarlo de otra manera mejor
+            Debug.WriteLine(exception);
         }
     }
 }

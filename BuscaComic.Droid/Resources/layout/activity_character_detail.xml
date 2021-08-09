@@ -46,5 +46,13 @@
                 local:MvxItemTemplate="@layout/single_text_item_view"
                 local:MvxBind="ItemsSource Events" />
         </LinearLayout>
+        <ProgressBar
+           android:id="@+id/loading_spinner"
+           style="?android:attr/progressBarStyleLarge"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_centerHorizontal="true"
+           android:layout_centerVertical="true"
+           local:MvxBind="Visible TaskNotifier.IsNotCompleted"/>
     </RelativeLayout>
 </ScrollView>
