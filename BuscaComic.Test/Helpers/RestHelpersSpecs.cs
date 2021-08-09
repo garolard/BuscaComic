@@ -1,4 +1,5 @@
-﻿using BuscaComic.Core.Helpers;
+﻿using BuscaComic.Core.Common.System;
+using BuscaComic.Core.Helpers;
 using BuscaComic.Core.Infrastructure;
 using BuscaComic.Core.Infrastructure.Impl;
 using BuscaComic.Test.Infrastructure;
@@ -23,21 +24,22 @@ namespace BuscaComic.Test.Helpers
         [Fact]
         public void Should_Build_A_Valid_Api_Url()
         {
-            var url = helpers.GetApiUrl("characters", new Dictionary<string, object>
+            using (SystemTime.Custom(() => new DateTime(2021, 09, 08, 12, 0, 0, 0)))
             {
-                { "name", "Captain America" }
-            });
+                var url = helpers.GetApiUrl("characters", new Dictionary<string, object>
+                {
+                    { "name", "Captain America" }
+                });
 
-            // Hace falta un sistema para hacer fakes sobre el tiempo para que los ticks sean
-            // los mismos aqui que en la llamada a GetApiUrl de más arriba
-            var ts = DateTime.Now.Ticks.ToString();
-            var publicKey = settingsManager["PublicKey"];
-            var privateKey = settingsManager["PrivateKey"];
+                var ts = SystemTime.Now().Ticks.ToString();
+                var publicKey = settingsManager["PublicKey"];
+                var privateKey = settingsManager["PrivateKey"];
 
-            var hash = RestHelpers.GenerateHash(ts, publicKey, privateKey);
-            Assert.Equal(
-                $"{settingsManager["BaseUrl"]}characters?ts={ts}&apikey={publicKey}&hash={hash}&name='Captain%20America",
-                url);
+                var hash = RestHelpers.GenerateHash(ts, publicKey, privateKey);
+                Assert.Equal(
+                    $"{settingsManager["BaseUrl"]}characters?ts={ts}&apikey={publicKey}&hash={hash}&name=Captain%20America",
+                    url);
+            }            
         }
     }
 }

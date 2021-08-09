@@ -1,4 +1,5 @@
 ﻿using BuscaComic.Core.Common.DBC;
+using BuscaComic.Core.Common.System;
 using BuscaComic.Core.Infrastructure;
 using BuscaComic.Core.Infrastructure.Impl;
 using Newtonsoft.Json;
@@ -34,7 +35,7 @@ namespace BuscaComic.Core.Helpers
         {
             Check.Require(!string.IsNullOrEmpty(endpoint), "No se puede construir una URL de API válida sin un endpoint");
 
-            var ts = DateTime.Now.Ticks.ToString();
+            var ts = SystemTime.Now().Ticks.ToString();
             var publicKey = settings["PublicKey"];
             var privateKey = settings["PrivateKey"];
             var hash = GenerateHash(ts, publicKey, privateKey);
