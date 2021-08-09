@@ -1,4 +1,5 @@
-﻿using BuscaComic.Core.Common.System;
+﻿using BuscaComic.Core.Common.DBC;
+using BuscaComic.Core.Common.System;
 using BuscaComic.Core.Helpers;
 using BuscaComic.Core.Infrastructure;
 using BuscaComic.Core.Infrastructure.Impl;
@@ -19,6 +20,12 @@ namespace BuscaComic.Test.Helpers
         {
             this.settingsManager = new AppSettingsManagerFake();
             this.helpers = new RestHelpers(settingsManager);
+        }
+
+        [Fact]
+        public void An_Endpoint_Must_Be_Provided()
+        {
+            Assert.Throws<PreconditionException>(() => helpers.GetApiUrl("", new Dictionary<string, object>()));
         }
 
         [Fact]
